@@ -2,13 +2,17 @@ stages:
   - build
   - deploy
 
+
+variables:
+  GLOBAL_VAR: "2.0"  
+
 criar_imagens:
   stage: build
   tags:
     - aws
   script:
-  - docker build -t phaelcrypto/meusite:1.0 app/.
-  - docker push phaelcrypto/meusite:1.0
+  - docker build -t phaelcrypto/meusite:$GLOBAL_VAR app/.
+  - docker push phaelcrypto/meusite:$GLOBAL_VAR
 
 executar_imagens:
   stage: deploy
@@ -16,6 +20,9 @@ executar_imagens:
     - criar_imagens
   tags:
     - aws
+  before_script:
+  - docker rm (docker ps -a -q) --force
   script:
-  - docker run -dti --name web-server -p 80:80 phaelcrypto/meusite:1.0    
-
+  - docker run -dti --name web-server -p 80:80 phaelcrypto/meusite:$GLOBAL_VAR    
+  after_script:
+  - docker system prune --force
