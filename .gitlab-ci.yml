@@ -21,8 +21,8 @@ executar_imagens:
   tags:
     - aws
   before_script:
-  - docker rm (docker ps -a -q) --force
+  - docker rm $(docker ps -a -q) --force
   script:
-  - docker run -dti --name web-server -p 80:80 phaelcrypto/meusite:$GLOBAL_VAR    
+  - docker run -dti --name web-server -p 80:80 phaelcrypto/meusite:$GLOBAL_VAR   
   after_script:
   - docker system prune --force
