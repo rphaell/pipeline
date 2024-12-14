@@ -1,0 +1,13 @@
+stages:
+  - build
+  - deploy
+
+criar_images:
+  stage: build
+  tags:
+    - aws
+  script:
+  - docker build-t phaelcrypto/meusite:1.0 app/.
+  - docker push phaelcrypto/meusite:1.0
+  
+
