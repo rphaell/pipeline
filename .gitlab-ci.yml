@@ -10,4 +10,12 @@ criar_imagens:
   - docker build -t phaelcrypto/meusite:1.0 app/.
   - docker push phaelcrypto/meusite:1.0
 
+executar_imagens:
+  stage: deploy
+  needs:
+    - criar_imagens
+  tags:
+    - aws
+  script:
+  - docker run -dti --name web-server -p 80:80 phaelcrypto/meusite:1.0    
 
