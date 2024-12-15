@@ -4,7 +4,7 @@ stages:
 
 
 variables:
-  GLOBAL_VAR: "3.0"  
+  GLOBAL_VAR: "4.0"  
 
 criar_imagens:
   stage: build
